@@ -73,11 +73,11 @@ def plot(x, y, z, title, x_label, y_label, z_label):
 
 
 # Social distancing analysis
-df = pd.read_csv("data/social_distancing/social_distancing_policy_combined.csv")
-x = np.arange(0.05, 1, 0.05)
-y = np.arange(0, 1, 0.2)
-for t in ['time_25', 'time_50', 'time_75', 'time_100']:
-  plot(x, y, df[t].values, f"Lockdown Policy ({t}), Averaged (n=30)", "n_M/n_T", "p_s", t)
+# df = pd.read_csv("data/social_distancing/social_distancing_policy_combined.csv")
+# x = np.arange(0.05, 1, 0.05)
+# y = np.arange(0, 1, 0.2)
+# for t in ['time_25', 'time_50', 'time_75', 'time_100']:
+#   plot(x, y, df[t].values, f"Lockdown Policy ({t}), Averaged (n=30)", "n_M/n_T", "p_s", t)
 
 # df = pd.read_csv("data/social_distancing/social_distancing_policy_diff.csv")
 # ax = plt.axes()
@@ -86,10 +86,32 @@ for t in ['time_25', 'time_50', 'time_75', 'time_100']:
 # plt.title("Difference in t_50 between n_M/n_T=0.3 and =0.7 across p_s")
 # plt.plot(df['p_s'], df['d_mu'])
 # plt.plot(df['p_s'], df['d_mu'], '.', c='r', label='d_mu')
-# plt.legend(loc='upper right')
+# plt.legend(loc='upper left')
 # plt.show()
 # from scipy.stats import pearsonr
 # print(pearsonr(df['p_s'], df['d_mu'])[0])
+#
+# ax = plt.axes()
+# ax.set_xlabel("p_s^2")
+# ax.set_ylabel("d_mu")
+# plt.title("Difference in t_50 between n_M/n_T=0.3 and =0.7 across p_s^2")
+# plt.plot(df['p_s^2'], df['d_mu'])
+# plt.plot(df['p_s^2'], df['d_mu'], '.', c='r', label='d_mu')
+# plt.legend(loc='upper left')
+# plt.show()
+# from scipy.stats import pearsonr
+# print(pearsonr(df['p_s^2'], df['d_mu'])[0])
+#
+# ax = plt.axes()
+# ax.set_xlabel("p_s^4")
+# ax.set_ylabel("d_mu")
+# plt.title("Difference in t_50 between n_M/n_T=0.3 and =0.7 across p_s^4")
+# plt.plot(df['p_s^4'], df['d_mu'])
+# plt.plot(df['p_s^4'], df['d_mu'], '.', c='r', label='d_mu')
+# plt.legend(loc='upper left')
+# plt.show()
+# from scipy.stats import pearsonr
+# print(pearsonr(df['p_s^4'], df['d_mu'])[0])
 
 
 # # Improved Hygiene policy analysis
@@ -108,18 +130,38 @@ for t in ['time_25', 'time_50', 'time_75', 'time_100']:
 # plt.plot(df['r_i'], df['d_mu'], '.', c='r', label='d_mu')
 # plt.legend(loc='upper right')
 # plt.show()
+#
+# ax = plt.axes()
+# ax.set_xlabel("r_i^2")
+# ax.set_ylabel("d_mu")
+# plt.title("Difference in t_50 between n_M/n_T=0.3 and =0.7 across r_i^2")
+# plt.plot(df['r_i^2'], df['d_mu'])
+# plt.plot(df['r_i^2'], df['d_mu'], '.', c='r', label='d_mu')
+# plt.legend(loc='upper right')
+# plt.show()
 # from scipy.stats import pearsonr
-# print(pearsonr(df['r_i'], df['d_mu'])[0])
+# print(pearsonr(df['r_i^2'], df['d_mu'])[0])
+#
+# ax = plt.axes()
+# ax.set_xlabel("r_i^4")
+# ax.set_ylabel("d_mu")
+# plt.title("Difference in t_50 between n_M/n_T=0.3 and =0.7 across r_i^4")
+# plt.plot(df['r_i^4'], df['d_mu'])
+# plt.plot(df['r_i^4'], df['d_mu'], '.', c='r', label='d_mu')
+# plt.legend(loc='upper right')
+# plt.show()
+# from scipy.stats import pearsonr
+# print(pearsonr(df['r_i^4'], df['d_mu'])[0])
 
 
-df = pd.read_excel("data/control_2/std_dev_2.xlsx", sheet_name="Sheet2")
-ax = plt.axes()
-ax.set_xlabel("n_M/n_T")
-ax.set_ylabel("std_dev at t_50")
-plt.title("Standard Deviation at t_50 against n_M/n_T")
-plt.plot(df['ratio'], df['std dev'], label="std_dev")
-plt.legend(loc='upper left')
-plt.show()
+# df = pd.read_excel("data/control_2/std_dev_2.xlsx", sheet_name="Sheet2")
+# ax = plt.axes()
+# ax.set_xlabel("n_M/n_T")
+# ax.set_ylabel("std_dev at t_50")
+# plt.title("Standard Deviation at t_50 against n_M/n_T")
+# plt.plot(df['ratio'], df['std dev'], label="std_dev")
+# plt.legend(loc='upper left')
+# plt.show()
 
 
 # Widespread Testing policy analysis
@@ -141,7 +183,7 @@ plt.show()
 # from scipy.stats import pearsonr
 # print(pearsonr(df['p_q'], df['d_mu'])[0])
 
-# df = pd.read_csv("data/widespread_testing/widespread_testing_policy_combined.csv")
-# x = np.arange(0.05, 1, 0.05)
-# y = np.arange(0, 0.02, 0.004)
-# plot(x, y, df['total_infected'].values, f"Aggressive Testing Policy, Averaged (n=30)", "n_M/n_T", "p_q", "total infected")
+df = pd.read_csv("data/widespread_testing/widespread_testing_policy_combined.csv")
+x = np.arange(0.05, 1, 0.05)
+y = np.arange(0, 0.02, 0.004)
+plot(x, y, df['total_infected'].values, f"Aggressive Testing Policy, Averaged (n=30)", "n_M/n_T", "p_q", "total infected")

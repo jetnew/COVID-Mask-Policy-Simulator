@@ -83,30 +83,32 @@ import scipy
 # data /= 30
 # data.to_csv("data/social_distancing/social_distancing_combined.csv", index=None)
 
-# # Social distancing Difference Analysis
+# Social distancing Difference Analysis
 df = pd.read_csv("data/social_distancing/social_distancing_policy_combined.csv")
-# print(df.loc[df['num_doves'] == 60].loc[round(df['percent_stationary'],1) == 0.2])
-# print(df.loc[df['num_doves'] == 60]['percent_stationary'][81])
-# diff = []
-# t1s = []
-# t2s = []
-#
-#
-# for i in np.arange(0, 1, 0.2):
-#     t1 = df.loc[df['num_doves'] == 60].loc[round(df['percent_stationary'],1) == round(i,1)]['time_50'].values[0]
-#     t2 = df.loc[df['num_doves'] == 140].loc[round(df['percent_stationary'],1) == round(i,1)]['time_50'].values[0]
-#     t1s.append(t1)
-#     t2s.append(t2)
-#     diff.append(t2 - t1)
-# pd.DataFrame({
-#     'p_s': [0,0.2,0.4,0.6,0.8],
-#     '60': t1s,
-#     '140': t2s,
-#     'd_mu': diff,
-# }).to_csv("data/social_distancing/social_distancing_policy_diff.csv", index=False)
-# print(t1s)
-# print(t2s)
-# print(diff)
+print(df.loc[df['num_doves'] == 60].loc[round(df['percent_stationary'],1) == 0.2])
+print(df.loc[df['num_doves'] == 60]['percent_stationary'][81])
+diff = []
+t1s = []
+t2s = []
+
+
+for i in np.arange(0, 1, 0.2):
+    t1 = df.loc[df['num_doves'] == 60].loc[round(df['percent_stationary'],1) == round(i,1)]['time_50'].values[0]
+    t2 = df.loc[df['num_doves'] == 140].loc[round(df['percent_stationary'],1) == round(i,1)]['time_50'].values[0]
+    t1s.append(t1)
+    t2s.append(t2)
+    diff.append(t2 - t1)
+pd.DataFrame({
+    'p_s': [0,0.2,0.4,0.6,0.8],
+    'p_s^2': [i**2 for i in [0,0.2,0.4,0.6,0.8]],
+    'p_s^4': [i**4 for i in [0,0.2,0.4,0.6,0.8]],
+    '60': t1s,
+    '140': t2s,
+    'd_mu': diff,
+}).to_csv("data/social_distancing/social_distancing_policy_diff.csv", index=False)
+print(t1s)
+print(t2s)
+print(diff)
 
 
 # Improved Hygiene
@@ -128,27 +130,29 @@ df = pd.read_csv("data/social_distancing/social_distancing_policy_combined.csv")
 
 
 # Improved Hygiene Policy
-# df = pd.read_csv("data/improved_hygiene/improved_hygiene_policy_combined.csv")
-# # print(df.loc[df['num_doves'] == 60].loc[round(df['infection_rate'],2) == round(0.2,2)]['time_50'].values[0])
-# diff = []
-# t1s = []
-# t2s = []
-#
-# for i in np.arange(0.2, 0, -0.04):
-#     t1 = df.loc[df['num_doves'] == 60].loc[round(df['infection_rate'],2) == round(i,2)]['time_50'].values[0]
-#     t2 = df.loc[df['num_doves'] == 140].loc[round(df['infection_rate'],2) == round(i,2)]['time_50'].values[0]
-#     t1s.append(t1)
-#     t2s.append(t2)
-#     diff.append(t2 - t1)
-# pd.DataFrame({
-#     'r_i': [0.04,0.08,0.12,0.16,0.20],
-#     '60': t1s,
-#     '140': t2s,
-#     'd_mu': diff,
-# }).to_csv("data/improved_hygiene/improved_hygiene_policy_diff.csv", index=False)
-# print(t1s)
-# print(t2s)
-# print(diff)
+df = pd.read_csv("data/improved_hygiene/improved_hygiene_policy_combined.csv")
+# print(df.loc[df['num_doves'] == 60].loc[round(df['infection_rate'],2) == round(0.2,2)]['time_50'].values[0])
+diff = []
+t1s = []
+t2s = []
+
+for i in np.arange(0.2, 0, -0.04):
+    t1 = df.loc[df['num_doves'] == 60].loc[round(df['infection_rate'],2) == round(i,2)]['time_50'].values[0]
+    t2 = df.loc[df['num_doves'] == 140].loc[round(df['infection_rate'],2) == round(i,2)]['time_50'].values[0]
+    t1s.append(t1)
+    t2s.append(t2)
+    diff.append(t2 - t1)
+pd.DataFrame({
+    'r_i': [0.04,0.08,0.12,0.16,0.20],
+    'r_i^2': [i**2 for i in [0.04,0.08,0.12,0.16,0.20]],
+    'r_i^4': [i**4 for i in [0.04,0.08,0.12,0.16,0.20]],
+    '60': t1s,
+    '140': t2s,
+    'd_mu': diff,
+}).to_csv("data/improved_hygiene/improved_hygiene_policy_diff.csv", index=False)
+print(t1s)
+print(t2s)
+print(diff)
 
 
 # Aggressive Testing Policy
@@ -166,23 +170,23 @@ df = pd.read_csv("data/social_distancing/social_distancing_policy_combined.csv")
 # data /= 30
 # data.to_csv("data/widespread_testing/widespread_testing_policy_combined.csv", index=None)
 
-df = pd.read_csv("data/widespread_testing/widespread_testing_policy_combined.csv")
-diff = []
-t1s = []
-t2s = []
-
-for i in np.arange(0, 0.02, 0.004):
-    t1 = df.loc[df['num_doves'] == 60].loc[round(df['probability_quarantined'],2) == round(i,2)]['time_50'].values[0]
-    t2 = df.loc[df['num_doves'] == 140].loc[round(df['probability_quarantined'],2) == round(i,2)]['time_50'].values[0]
-    t1s.append(t1)
-    t2s.append(t2)
-    diff.append(t2 - t1)
-pd.DataFrame({
-    'p_q': [0.004,0.008,0.012,0.016,0.020],
-    '60': t1s,
-    '140': t2s,
-    'd_mu': diff,
-}).to_csv("data/widespread_testing/widespread_testing_policy_diff.csv", index=False)
-print(t1s)
-print(t2s)
-print(diff)
+# df = pd.read_csv("data/widespread_testing/widespread_testing_policy_combined.csv")
+# diff = []
+# t1s = []
+# t2s = []
+#
+# for i in np.arange(0, 0.02, 0.004):
+#     t1 = df.loc[df['num_doves'] == 60].loc[round(df['probability_quarantined'],2) == round(i,2)]['time_50'].values[0]
+#     t2 = df.loc[df['num_doves'] == 140].loc[round(df['probability_quarantined'],2) == round(i,2)]['time_50'].values[0]
+#     t1s.append(t1)
+#     t2s.append(t2)
+#     diff.append(t2 - t1)
+# pd.DataFrame({
+#     'p_q': [0.004,0.008,0.012,0.016,0.020],
+#     '60': t1s,
+#     '140': t2s,
+#     'd_mu': diff,
+# }).to_csv("data/widespread_testing/widespread_testing_policy_diff.csv", index=False)
+# print(t1s)
+# print(t2s)
+# print(diff)
